@@ -1,0 +1,47 @@
+{% set name = "wield.control" %}
+{% set version = "0.6.1" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/wield.control-{{ version }}.tar.gz
+  sha256: 925c95f08393a749fd2a0ba64048d4ed74f9f6f12c020f06612c62025c83e809
+
+build:
+  noarch: python
+  script: {{ PYTHON }} -m pip install . -vv
+  number: 0
+
+requirements:
+  host:
+    - python
+    - setuptools >=45
+    - wheel
+    - pip
+  run:
+    - python
+    - wield.bunch
+    - wield.utilities
+    - numpy
+    - scipy
+    - matplotlib
+
+test:
+  imports:
+    - wield
+  commands:
+    - pip check
+  requires:
+    - pip
+
+about:
+  home: https://github.com/wieldphysics/wield-control
+  summary: Toolkit for control systems
+  license: Apache-2.0
+  license_file: LICENSES/
+
+extra:
+  recipe-maintainers:
+    - mccullerlp 
